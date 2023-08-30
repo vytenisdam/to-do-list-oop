@@ -16,7 +16,7 @@ class TaskList:
         due_date = new_task.due_date
         creation_date = new_task.creation_date
         status = 'To be done.'
-        self.tasks.append({'Task name': name , 'Description': description, 'Due date': due_date,'Priority': priority, 'Status': status, 'Creation date': str(creation_date)})
+        self.tasks.append({'Task name': name , 'Description': description, 'Due date': due_date,'Priority': priority, 'Status': status, 'Creation date': creation_date})
         FileReader.write_file(self.tasks)
     
     def search_task_by_name(self, name):
@@ -34,9 +34,9 @@ class TaskList:
         pass
     
     def display_all_tasks(self):
-        for task in self.tasks:
-            self.task_importance()
-            print(task)
+        #for task in self.tasks:
+        print(self.task_importance())
+            #print(task)
         
     def sort_tasks_by_creation_date(self):
         pass
@@ -50,11 +50,15 @@ class TaskList:
         FileReader.write_file(self.tasks)
         
     def task_importance(self):
+        tasks = []
         for task in self.tasks:
-            if int(task['Priority']) == 3:
+            if int(task['Priority']) >= 3:
                 task['Priority'] = 'Very important'
-            elif int(task['Priority']) == 1:
+                tasks.append(task)
+            elif int(task['Priority']) <= 1:
                 task['Priority'] = 'Not important'
+                tasks.append(task)
             else:
                 task['Priority'] = 'Average importance'
-    
+                tasks.append(task)
+        return tasks
