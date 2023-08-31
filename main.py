@@ -13,4 +13,7 @@ list_of_tasks = TaskList()
 #list_of_tasks.add_task('kwtc','sasda','2023-12-15', 6)
 #list_of_tasks.mark_task_done('pirma')
 #list_of_tasks.add_task('antra','betkas','2023-10-19',1)
-list_of_tasks.display_all_tasks()
+#list_of_tasks.display_all_tasks()
+# print(list_of_tasks.sort_tasks_by_creation_date())
+print(list_of_tasks.sort_by_importance())
+

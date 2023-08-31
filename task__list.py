@@ -1,6 +1,7 @@
 from tasks import Task
 from file_read import FileReader
 from datetime import date
+from datetime import datetime
 
 
 class TaskList:
@@ -34,22 +35,29 @@ class TaskList:
         pass
     
     def display_all_tasks(self):
-        #for task in self.tasks:
-        print(self.task_importance())
-            #print(task)
+        data = self.task_importance()
+        for i in data:
+            print(i)
+    
+    def sort_by_importance(self):
+        self.tasks.sort(key=lambda x:x['Priority'],reverse=True)
+        return self.tasks
         
     def sort_tasks_by_creation_date(self):
-        pass
+        self.tasks.sort(key=lambda x:x['Creation date'])
+        return self.tasks
     
     def sort_tasks_by_due_date(self):
-        pass
+        self.tasks.sort(key=lambda x: datetime.strptime(x['Due date'], '%Y-%m-%d'))
+        return self.tasks
+        
     
     def mark_task_done(self,name):
         task_to_mark = self.search_task_by_name(name)
         task_to_mark['Status'] = f'Done on {str(date.today())}.'
         FileReader.write_file(self.tasks)
         
-    def task_importance(self):
+    def task_set_importance(self):
         tasks = []
         for task in self.tasks:
             if int(task['Priority']) >= 3:
