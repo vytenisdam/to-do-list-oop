@@ -31,11 +31,11 @@ class TaskList:
         FileReader.write_file(self.tasks)
     
     def edit_task(self,name,description,due_date):
-        #creation date idet
+        #editinimas bus removinant sena ir pridedant nauja vietoj jos
         pass
     
     def display_all_tasks(self):
-        data = self.task_importance()
+        data = self.task_set_importance()
         for i in data:
             print(i)
     
@@ -70,3 +70,10 @@ class TaskList:
                 task['Priority'] = 'Average importance'
                 tasks.append(task)
         return tasks
+    
+    def show_undone_tasks(self):
+        data = self.task_set_importance()
+        for i in data:
+            if i['Status'] == 'To be done.':
+                print(i)
+        
